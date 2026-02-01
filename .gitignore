@@ -1,4 +1,6 @@
 cmd/
 finder.go
 fs/
+finder
+
 
