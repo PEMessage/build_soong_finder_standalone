@@ -1,6 +1,6 @@
-cmd/
-finder.go
-fs/
+# cmd/
+# finder.go
+# fs/
 finder
 
 
