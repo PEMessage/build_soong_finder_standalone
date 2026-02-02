@@ -9,14 +9,17 @@ fi
 
 go build -o finder ./cmd/
 
-if commnad -v zig > /dev/null ; then
+if command -v zig > /dev/null ; then
     # Thanks to: https://calabro.io/zig-cgo
     # #            https://github.com/golang/go/issues/56386#issuecomment-1289185008
-    CC="zig cc -target x86_64-linux-musl" \
-        CGO_ENABLED=1 \
-        CGO_LDFLAGS="-static" \
-        GOOS=linux GOARCH=amd64 \
+    (
+        export CC="zig cc -target x86_64-linux-musl"
+        export CGO_ENABLED=1
+        export CGO_LDFLAGS="-static"
+        export GOOS=linux GOARCH=amd64
         go build -a -ldflags '-extldflags "-static"' -ldflags=-linkmode=external -o finder_static ./cmd/
+        go build -a -ldflags '-extldflags "-static"' -ldflags=-linkmode=external -o readdb ./main/
+    )
 fi
 
 
